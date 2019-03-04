@@ -9,6 +9,7 @@ import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private double posY = 1500;
     private int buttonWidth;
     private int buttonHeight;
+    Display display;
+
 
 
 
@@ -88,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         //////////////////////
 
         // new Accelerometer(MainActivity.this);
+        display = getWindowManager().getDefaultDisplay();
 
     }
 
@@ -97,12 +101,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         accelX = -event.values[0]*sensitivity;
         accelY = event.values[1]*sensitivity;
         accelZ = event.values[2]*sensitivity;
-        //modulusAccel = Math.sqrt(Math.pow(accelX, 2) + Math.pow(accelY,2));
+        modulusAccel = Math.sqrt(Math.pow(accelX, 2) + Math.pow(accelY,2));
 
 
         veloX = veloX + accelX -dampingCoefficient*veloX;
         veloY = veloY + accelY -dampingCoefficient*veloY;
-        //modulusVelo = Math.sqrt(Math.pow(veloX, 2) + Math.pow(veloY,2));
+        modulusVelo = Math.sqrt(Math.pow(veloX, 2) + Math.pow(veloY,2));
 
 //        try {
 //            xDirection = veloX/Math.abs(veloX);
@@ -115,10 +119,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         posX = posX + veloX;
         posY = posY + veloY;
 
+        stayInFrame(250,100);
+
         button.setX((int)Math.round(posX));
         button.setY((int)Math.round(posY));
 
-        locationBox.setText(getPointOfView(button).toString());
+        //locationBox.setText(getPointOfView(button).toString());
+        locationBox.setText("Velocity(" + (int)veloX  + "," + (int)veloY + ")");
 //
 //        locationBox.setText(String.valueOf(event.values[0] + "  " + event.values[1] + "  " + event.values[2]));
 
@@ -133,6 +140,20 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         int[] location = new int[2];
         view.getLocationInWindow(location);
         return new Point(location[0], location[1]);
+    }
+
+    public void stayInFrame(int objectWidth, int objectHeight) {
+        if (posY < -objectHeight) {
+            posY = display.getHeight();
+        } else if (posY > display.getHeight()) {
+            posY = -objectHeight;
+        }
+
+        if (posX < -objectWidth) {
+            posX = display.getWidth();
+        } else if (posX > display.getWidth()){
+            posX = -objectWidth;
+        }
     }
 
     @Override
