@@ -19,6 +19,15 @@ public class MovingButton implements View.OnClickListener {
     private double dampingCoefficient = 0;
     MovingButton movingButton = Accelerometer.movingButton;
 
+    public double getxPosition() {
+        return xPosition;
+    }
+
+    public double getyPosition() {
+        return yPosition;
+    }
+
+
     public void setxPosition(double xPosition) {
         this.xPosition = xPosition;
     }
@@ -45,10 +54,6 @@ public class MovingButton implements View.OnClickListener {
 
     public void setzAcceleration(double zAcceleration) {
         this.zAcceleration = zAcceleration;
-    }
-
-    public void initClickListener() {
-        MainActivity.reset.setOnClickListener(MovingButton.this);
     }
 
     public void calculatePosition(){
@@ -86,6 +91,10 @@ public class MovingButton implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        resetButton();
+    }
+
+    public void resetButton() {
         MainActivity.button.setX(300);
         MainActivity.button.setY(1500);
 
