@@ -11,10 +11,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-
 public class MainActivity extends AppCompatActivity {
 
     // TODO: 1 Implement friction
@@ -27,9 +23,8 @@ public class MainActivity extends AppCompatActivity {
     public static Button reset;
     public static Display display;
     public static ConstraintLayout layout;
-    //public static Timer createObstacleTimer = new Timer(true);
     public static Runnable createObstacleTimer;
-    private MovingObstacle movingObstacle;
+    public static Handler createObstacleHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,36 +47,28 @@ public class MainActivity extends AppCompatActivity {
         Accelerometer accelerometer = new Accelerometer();
         accelerometer.accelerometerInit(this);
 
-        // new Accelerometer(MainActivity.this);
         display = getWindowManager().getDefaultDisplay();
-
-        //movingObstacle = new MovingObstacle(this);
-        // movingObstacle.obstacleMove();
-        //new MovingObstacle(this).obstacleMove();
-        //new MovingObstacle(this).obstacleMove();
 
         initCreateObstacles();
 
         Log.d("tag", "***************" + Integer.toString(MovingObstacle.movingObstacles.size()));
 
-        // TODO: Every 3 seconds, a new object is created. Last object is removed as it reaches bottom
 
     }
 
-
     public void initCreateObstacles() {
-        final Handler handler = new Handler();
+        createObstacleHandler = new Handler();
         createObstacleTimer = new Runnable() {
             @Override
             public void run() {
                 // Do something here on the main thread
 
-                new MovingObstacle(MainActivity.this).obstacleMove();
-                handler.postDelayed(createObstacleTimer, 1000);
+                new MovingObstacle(MainActivity.this);
+                createObstacleHandler.postDelayed(createObstacleTimer, 1000);
 
             }
         };
-        handler.post(createObstacleTimer);
+        createObstacleHandler.post(createObstacleTimer);
     }
 
 

@@ -4,54 +4,30 @@ import android.view.View;
 
 public class MovingButton implements View.OnClickListener {
 
-    private double xAcceleration;
-    private double yAcceleration;
-    private double zAcceleration;
-
-    private double xVelocity;
-    private double yVelocity;
-    private double zVelocity;
-
-    private double xPosition;
-    private double yPosition;
-    private double zPosition;
-
+    private double xAcceleration, yAcceleration, zAcceleration;
+    private double xVelocity, yVelocity, zVelocity;
+    private double xPosition, yPosition, zPosition;
     private double dampingCoefficient = 0;
     MovingButton movingButton = Accelerometer.movingButton;
-
-    public double getxPosition() {
-        return xPosition;
-    }
-
-    public double getyPosition() {
-        return yPosition;
-    }
-
 
     public void setxPosition(double xPosition) {
         this.xPosition = xPosition;
     }
-
     public void setyPosition(double yPosition) {
         this.yPosition = yPosition;
     }
-
     public void setxVelocity(double xVelocity) {
         this.xVelocity = xVelocity;
     }
-
     public void setyVelocity(double yVelocity) {
         this.yVelocity = yVelocity;
     }
-
     public void setxAcceleration(double xAcceleration) {
         this.xAcceleration = xAcceleration;
     }
-
     public void setyAcceleration(double yAcceleration) {
         this.yAcceleration = yAcceleration;
     }
-
     public void setzAcceleration(double zAcceleration) {
         this.zAcceleration = zAcceleration;
     }
@@ -68,12 +44,7 @@ public class MovingButton implements View.OnClickListener {
         MainActivity.button.setX((int)Math.round(xPosition));
         MainActivity.button.setY((int)Math.round(yPosition));
 
-        //locationBox.setText(getPointOfView(button).toString());
-        MainActivity.locationBox.setText("Velocity(" + (int)xVelocity  + "," + (int)yVelocity + ")");
-//
-//        locationBox.setText(String.valueOf(event.values[0] + "  " + event.values[1] + "  " + event.values[2]));
     }
-
 
     public void stayInFrame(int objectWidth, int objectHeight) {
         if (yPosition < -objectHeight) {
@@ -102,5 +73,7 @@ public class MovingButton implements View.OnClickListener {
         movingButton.setyPosition(1500);
         movingButton.setxVelocity(0);
         movingButton.setyVelocity(0);
+
+        Accelerometer.initTime = System.currentTimeMillis();
     }
 }
