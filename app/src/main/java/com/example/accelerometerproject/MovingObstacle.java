@@ -6,9 +6,10 @@ import android.support.constraint.ConstraintLayout;
 import android.widget.Button;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 
 public class MovingObstacle {
-    public static ArrayList<MovingObstacle> movingObstacles = new ArrayList<>();
+    public static LinkedList<MovingObstacle> movingObstacles = new LinkedList<>();
     private double xPosition;
     private double yPosition = 150;
     private MovingButton movingButton = Accelerometer.movingButton;
@@ -17,6 +18,7 @@ public class MovingObstacle {
     private double obstacleSpeed = 2000;
     private double timeNow;
     private Date dateAfter;
+    public static int i = 0;
 
     public MovingObstacle(Context context) {
         this.timeNow = System.currentTimeMillis();
@@ -26,12 +28,20 @@ public class MovingObstacle {
         this.button.setY((float) yPosition);
         this.button.setText("o");
         layout.addView(this.button);
-        // movingObstacles.add(this);
-        animateMoveDown();
+        movingObstacles.add(this);
+        // animateMoveDown();
     }
 
     public void setyPosition(double yPosition) {
         this.yPosition = yPosition;
+    }
+
+    public double getyPosition() {
+        return this.yPosition;
+    }
+
+    public double getxPosition() {
+        return this.xPosition;
     }
 
 
@@ -42,6 +52,25 @@ public class MovingObstacle {
 
 
         // checkCollision();
+    }
+
+    public void moveDown() {
+        this.yPosition = this.yPosition + 15;
+        this.button.setY((float) yPosition);
+        if (this.yPosition == MainActivity.display.getHeight()) {
+            //MovingObstacle.movingObstacles.remove(i-1);
+            layout.removeView(this.button);
+        }
+    }
+
+    public void iterateObstacleArray() {
+        int len = movingObstacles.size();
+        if (i < len) {
+            movingObstacles.get(i).moveDown();
+            i++;
+        } else if (i == len) {
+            i = 0;
+        }
     }
 
     public void checkCollision() {

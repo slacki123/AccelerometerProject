@@ -10,6 +10,14 @@ public class MovingButton implements View.OnClickListener {
     private double dampingCoefficient = 0;
     MovingButton movingButton = Accelerometer.movingButton;
 
+    public double getyPosition() {
+        return yPosition;
+    }
+
+    public double getxPosition() {
+        return xPosition;
+    }
+
     public void setxPosition(double xPosition) {
         this.xPosition = xPosition;
     }
