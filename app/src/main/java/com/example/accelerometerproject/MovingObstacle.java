@@ -32,6 +32,10 @@ public class MovingObstacle {
         // animateMoveDown();
     }
 
+    public Button getButton() {
+        return this.button;
+    }
+
     public void setyPosition(double yPosition) {
         this.yPosition = yPosition;
     }
@@ -55,11 +59,11 @@ public class MovingObstacle {
     }
 
     public void moveDown() {
-        this.yPosition = this.yPosition + 15;
+        this.yPosition = this.yPosition + 0.3;
         this.button.setY((float) yPosition);
         if (this.yPosition == MainActivity.display.getHeight()) {
             //MovingObstacle.movingObstacles.remove(i-1);
-            layout.removeView(this.button);
+            //layout.removeView(this.button);
         }
     }
 
