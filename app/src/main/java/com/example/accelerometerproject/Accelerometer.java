@@ -1,10 +1,13 @@
 package com.example.accelerometerproject;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import java.text.DecimalFormat;
@@ -26,6 +29,7 @@ public class Accelerometer implements SensorEventListener {
         Sensor accelerometer = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sm.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_FASTEST);
     }
+
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
@@ -55,6 +59,14 @@ public class Accelerometer implements SensorEventListener {
                     && movingObstacle.get(MovingObstacle.i - 1).getyPosition() < movingButton.getyPosition()
                     && movingObstacle.get(MovingObstacle.i - 1).getyPosition() > 50) {
                 Log.d("tag", "COLLISION DETECTED");
+
+//                Intent gameOverIntent = new Intent(Accelerometer.this, GameOver.class);
+//                startActivity(gameOverIntent);
+
+//                Intent gameOverIntent = new Intent(getApplicationContext(), GameOver.class);
+//                startActivity(gameOverIntent);
+
+
                 // Trigger game over
             }
 

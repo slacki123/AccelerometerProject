@@ -71,6 +71,7 @@ public class MovingButton implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         resetButton();
+
     }
 
     public void resetButton() {
