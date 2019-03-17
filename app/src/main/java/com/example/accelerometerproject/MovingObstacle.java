@@ -26,7 +26,7 @@ public class MovingObstacle {
         if (MainActivity.movingObstacles.size() < 10) {
             this.button = new Button(context);
             this.button.setX((float) this.xPosition);
-            this.button.setY((float) yPosition);
+            this.button.setY((float) this.yPosition);
             this.button.setText("o");
             layout.addView(this.button);
             MainActivity.movingObstacles.add(this);

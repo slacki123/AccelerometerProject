@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         display = getWindowManager().getDefaultDisplay();
 
         initCreateObstacles();
-        new LoopingClass().start();
+        new LoopingClass();
 
         // Log.d("tag", "***************" + Integer.toString(this.movingObstacles.size()));
     }

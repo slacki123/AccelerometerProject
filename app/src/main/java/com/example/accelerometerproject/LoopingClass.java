@@ -15,12 +15,17 @@ public class LoopingClass implements Runnable {
     private MovingButton movingButton = Accelerometer.movingButton;
     private Thread t;
 
+    LoopingClass() {
+        start();
+    }
+
+
 
     public void updateArray() {
         len = movingObstacle.size();
 
         if (i < len) {
-            movingObstacle.get(i).moveDown();
+            MainActivity.movingObstacles.get(i).moveDown();
 
             if (movingObstacle.get(i).getxPosition() < movingButton.getxPosition()
                     && movingObstacle.get(i).getxPosition() > 150
@@ -46,9 +51,10 @@ public class LoopingClass implements Runnable {
             Log.d("tag", Integer.toString(len));
         } else if (i == movingObstacle.size() - 1) {
             i = 0;
-        } else {
-            i++;
         }
+
+        i++;
+
     }
 
     public void start() {
