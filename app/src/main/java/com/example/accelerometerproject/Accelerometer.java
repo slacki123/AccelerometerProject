@@ -65,7 +65,7 @@ public class Accelerometer implements SensorEventListener {
 
 
             //Log.d("tag", Integer.toString(len));
-        } else if (MovingObstacle.i == len) {
+        } else if (MovingObstacle.i == movingObstacle.size()) {
             MovingObstacle.i = 0;
         }
 
