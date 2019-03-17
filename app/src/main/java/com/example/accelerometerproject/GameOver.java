@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.jakewharton.processphoenix.ProcessPhoenix;
+
 public class GameOver extends AppCompatActivity {
 
     private Button restart;
@@ -20,8 +22,11 @@ public class GameOver extends AppCompatActivity {
         restart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mainIntent = new Intent(GameOver.this, MainActivity.class);
-                startActivity(mainIntent);
+
+//                Intent mainIntent = new Intent(GameOver.this, MainActivity.class);
+//                startActivity(mainIntent);
+
+                ProcessPhoenix.triggerRebirth(GameOver.this);
             }
         });
     }

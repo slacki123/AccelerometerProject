@@ -12,10 +12,14 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".GameOver"
+            android:label="Game Over"
+            android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>

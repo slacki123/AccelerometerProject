@@ -77,6 +77,7 @@ public class MovingButton implements View.OnClickListener {
     public void resetButton() {
         MainActivity.button.setX(300);
         MainActivity.button.setY(1500);
+        // MainActivity.layout.removeView(MainActivity.button);
 
         movingButton.setxPosition(300);
         movingButton.setyPosition(1500);
@@ -84,5 +85,6 @@ public class MovingButton implements View.OnClickListener {
         movingButton.setyVelocity(0);
 
         Accelerometer.initTime = System.currentTimeMillis();
+        // MainActivity.movingObstacles.clear();
     }
 }
